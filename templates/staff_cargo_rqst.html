@@ -1,0 +1,159 @@
+{% include 'staffheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+<form method="post">
+
+<form method="post">
+		{% if data['updater'] %}
+
+		<h1><B>CONFIRMATION SECTION</B></h1>
+
+		<table class="table" style="width:  700px">
+			
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>WEIGHT (kg)</th>
+			<td><input type="text" name="kg" style="width: auto;" class="form-control" value="{{data['updater'][0]['weight']}}"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>HEIGHT (cm)</th>
+			<td><input type="text" name="h" style="width: auto;" class="form-control" value="{{data['updater'][0]['length']}}" >
+			
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>WIDTH (cm)</th>
+			<td><input type="text" name="w" style="width: auto;" class="form-control" id="lat" value="{{data['updater'][0]['width']}}" >
+			
+		</tr>
+		
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PRICE (₹)</th>
+			<td><input type="text" name="amt" style="width: auto;" class="form-control" value="{{data['updater'][0]['minimum_price']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="CONFIRM" class="btn btn-outline-primary btn-lg"></td>
+		</tr>
+		
+	</table>
+
+
+
+		{% elif data['boy'] %}
+		<br><br><br><br><br><br><br><br>
+		<h1>ASSIGN CARGO PACKAGE</h1><br>
+		<table>
+			<tr>
+				<th>DELIVERY BOY : </th>
+				<td>&nbsp;
+					<select name="dboy" style="height: 45px;width: 250px;" required>
+						<option disabled>SELECT DELIVERY BOY</option>
+					{% for row in data['boy'] %}
+				
+					<option value="{{row['boy_id']}}">{{row['first_name']+" "+row['last_name']}}</option>
+					{% endfor %}
+					<td colspan="2" align="center">&emsp;<input type="submit" class="btn btn-outline-primary" name="submit" value="ASSIGN"></td>	
+
+				</select></td>
+			</tr>
+		</table>
+
+
+{% else %}
+		{% if data['booking'] %}
+		<h1><B>BOOKINGS</B></h1><br>
+		<table class="table" width="1000px" rules="rows">
+			<tr align="center">
+				<th>CUSTOMER NAME</th>
+				<th>FROM BRANCH</th>
+				<th>PICKUP ADDRESS</th>				
+				<th>PARCEL WEIGHT(kg)</th>
+				<th>PARCEL HEIGHT(cm)</th>
+				<th>PARCEL WIDTH(cm)</th>				
+				<th>TO BRANCH</th>
+				<TH>DESTINATION ADDRESS</TH>
+				<th>STATUS</th>
+			    <th>AMOUNT</th>
+				<th></th>
+				
+			</tr>
+			{% for row in data['booking'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>{{row['first_name']}}</td>
+				{% for i in data['branch'] %}
+					{% if i['branch_id'] ==row['from_branch'] %}
+					<td>{{i['branch_name']}}</td>
+					{% endif %}
+				{% endfor %}
+				<td>{{row['from_loc']}}</td>
+				<td>{{ row['weight'] }}</td>
+				<td>{{row ['length']}}</td>
+				<td>{{ row['width']}}</td>
+				<!-- <td>{{data['branch_id']}} {{row['from_branch']}}</td> -->
+				
+				{% for i in data['branch'] %}
+					
+					{% if i['branch_id']==row['to_branch'] %}
+					<td>{{i['branch_name']}}</td>
+					{% endif %}
+				 {% endfor %}
+				 <td>{{ row['toloc'] }}</td>
+				<td>{{row['booking_status']}}</td>
+				{% if data['branch_id']==row['from_branch'] %}
+						{% if row['amount']=='Pending' %}
+                    <!-- <td></td> -->
+					<td><a href="?action=update&id={{ row['booking_id'] }}" class="btn btn-outline-primary btn-sm">CONFIRM PACKAGE</a></td>
+					{% endif %}
+
+					{% if row['booking_status']=='arrived'  %}
+					<td style="pointer-events: none;" class="btn btn-outline-primary btn-sm">PAID -{{row['amount']}}</td>
+						{% if row['boy_id'] |int==0 %}
+						<td><a href="?action3=dispatched&id={{ row['booking_id'] }}" class="btn btn-outline-primary btn-sm">DISPATCHED</a></td>
+					
+						
+						<!-- <td></td> -->
+						<!-- <td><a href="boydetails?id={{row['boy_id']}}">VIEW DELIVERY BOY</a></td> -->
+						{% endif %}
+				
+					{% endif %}
+				{% endif %}
+				{% if (row['booking_status']=='dispatched') and (data['branch_id'] |int==row['to_branch'] |int) %}
+				<td style="pointer-events: none;" class="btn btn-outline-primary btn-sm">PAID ₹{{row['amount']}}/-</td>
+					{% if row['boy_id'] |int==0 %}
+					<td><a href="?action2=assigndboy&id={{ row['booking_id'] }}" class="btn btn-outline-primary btn-sm">ASSIGN BOY</a></td>
+				
+					{% endif %}
+					
+				{% endif %}
+				{% if (row['amount']!='Pending') and (row['booking_status']!='Pending') %}
+				<td style="pointer-events: none;margin-top:10px" class="btn-outline-light btn-sm ">PAID ₹{{row['amount']}}/-</td>
+				{% endif %}
+				{% if  (row['booking_status']=='Pending') %}
+				<td>{{row['booking_status']}}...</td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO BOOKINGS</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

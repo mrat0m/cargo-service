@@ -1,0 +1,54 @@
+{% include 'adminheader.html' %}
+
+
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE TOUR TYPE</h1>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>TOUR TYPE</th>
+				<td><input type="text" class="form-control" name="uptname" value="{{data['updater'][0]['typename']}}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+			</tr>
+		</table>
+		{% else %}
+		<h1>MANAGE TOUR TYPE</h1>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>TYPE NAME</th>
+				<td><input type="text" class="form-control" name="tname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+			</tr>
+		</table>
+		{% if data['type'] %}
+		<h1>TOUR TYPES ALREADY ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>TYPE NAME</th>
+				<th>UPDATE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['type'] %}
+			<tr>
+				<td>{{ row['typename'] }}</td>
+				<td><a href="?action=update&id={{ row['type_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['type_id'] }}" class="btn btn-danger" >DELETE</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO TOUR TYPES ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+
+
+
+{% include 'footer.html' %}

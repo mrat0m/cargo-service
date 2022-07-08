@@ -1,0 +1,77 @@
+{%  include 'customerheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+    <h1 style="margin-top: 3em"><B>REVIEW AND RATING</B></h1>
+<form method='post'>
+<table class="table" style="width: 500px"> 
+		<tr style="border-bottom-style: hidden;">
+			<th>BRANCH</th>
+			
+			<td style="border-bottom-style: hidden;">
+				<select name="bid">
+					{% for row in data['branch'] %}
+					
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+				
+					{% endfor %}
+				</select>
+			</td>
+	
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>RATE</th>
+			<td><input type="number" name="rate" class="form-control" max="5" placeholder="Rate Outof 5"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>REVIEW</th>
+			<td><input type="text" name="review" class="form-control"></td>
+		</tr>
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="ADD" class="btn btn-outline-primary"></td>
+		</tr>
+</table>
+
+
+{% if data['rating']%}
+<div style="overflow-y: auto;height: 160px">
+<table class="table" style="width: 800px">
+	<tr>
+		<th>BRANCH</th>
+		<th>RATE</th>
+		<th>REVIEW</th>
+		<th>DATE</th>
+	</tr>
+
+{% for row in data['rating'] %}
+<tr>
+	<td>{{row['branch_name']}}</td>
+	<td>{{row['rating_point']}}</td>
+	<td>{{row['review_comment']}}</td>
+	<td>{{row['review_date']}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+</div>
+</form>
+</center>
+
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

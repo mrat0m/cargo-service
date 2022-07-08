@@ -1,0 +1,219 @@
+{% include 'branchheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+
+<script type="text/javascript">
+	function fun(){
+		var password=document.getElementById('password').value;
+		var cpassword=document.getElementById('cpassword').value;
+		
+		if(password!=cpassword){
+			alert("PASSWORD DOES NOT MATCH");
+			document.getElementById("cpassword").value=''; 
+		}
+
+	}
+	function f2(){
+			var c=confirm("ARE YOU SURE TO TERMINATE DELIVERY BOY ")
+			 // if( c == true ) {
+    //               document.getElementById("resigned").value="set";
+    //               return true;
+    //            }
+    //             else {
+    //               document.getElementById("resigned").focus();
+    //               return false;
+    //            }         
+
+		}
+</script>
+<center>
+	<form method="post">
+		
+		{% if data['updater'] %}
+
+
+	<table >
+
+		<h1><B>UPDATE STAFF</B></h1>
+
+	<table class="table" style="width:  700px">
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>TRANSFER TO BRANCH</th>
+			<td>
+				<select name="branch" class="form-control">
+					 {% for row in data['branch'] %}
+					 {% if row['branch_id']==data['bid'] %}
+					<option value="{{row['branch_id']}}" selected>{{row['branch_name']}}</option>
+					{% else %}
+						<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+					{% endif %}
+					{% endfor %}
+
+				</select>
+
+			</td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>FIRST NAME</th>
+			<td><input type="text" name="fname"  class="form-control" value="{{data['updater'][0]['first_name']}}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>LAST NAME</th>
+			<td><input type="text" name="lname"  class="form-control" id="lat" value="{{data['updater'][0]['last_name']}}" required>
+			</td>
+		</tr>
+	
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" value="{{data['updater'][0]['phone']}}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" value="{{data['updater'][0]['email']}}" required></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-outline-primary"></td>
+		</tr>
+	</table>
+
+
+
+		{% else %}
+
+	<table >
+
+		<h1><B>ADD NEW STAFF</B></h1>
+
+		<table class="table" style="width:  700px">
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>FIRST NAME</th>
+			<td><input type="text" name="fname"  class="form-control" required pattern="[a-zA-Z ]+$"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>LAST NAME</th>
+			<td><input type="text" name="lname"  class="form-control" id="lat" required>
+			</td>
+		</tr>
+	
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" required pattern="[7-9]{1}[0-9]{9}"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" required></td>
+		</tr>
+		
+
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>USER NAME</th>
+			<td><input type="text" name="uname"  minlength="5" placeholder="User Name Must Be Atleast 5 Charecter " class="form-control" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PASSWORD</th>
+			<td><input type="password" name="password"  minlength="8" placeholder="Password Must Be Atleast 8 Charecter" class="form-control" required id="password"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>CONFIRM PASSWORD</th>
+			<td><input type="password" name="cpassword"  minlength="8" placeholder="Password Must Be Atleast 8 Charecter" class="form-control" required id="cpassword" onchange="fun()"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="REGISTER" class="btn btn-outline-primary"></td>
+		</tr>
+	</table>
+
+
+		
+
+		{% endif %}
+	</form>
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+
+<div style="color: black" align="center" id="abc">
+	<br>
+<form method="post">
+<table align="right">
+	<tr>
+		<td><input type="text" name="search" placeholder="Search by Staff Name"></td>
+		<td><input type="submit" name="find" class="btn btn-info" value="SEARCH"></td>
+	</tr>
+</table>
+</form>
+<br><br><br><br>
+		{% if data['staffs'] %}
+		<h1><B>STAFFS IN BRANCH -<I>{{data['bname']}}</I></B></h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>STAFF ID</th>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>STATUS</th>
+				
+				
+			</tr>
+			{% for row in data['staffs'] %}
+			<tr>
+				<td>B{{ data['bid'] }}STA0{{ row['staff_id'] }}</td>
+				<!-- <td>S__{{ row['staff_id'] }}</td> -->
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['last_name']}}</td>
+				<td>{{ row['phone']}}</td>
+				
+				<td>{{row['email']}}</td>
+				<!-- <td>{{row['user_type']}}</td> -->
+				{% if  row['user_type'] not in('resigned','resigned') %}
+				{% if  row['user_type'] not in('inactive','inactive') %}
+				<td>ACTIVE</td>
+				{% endif %}
+				{% if  row['user_type'] not in('staff','staff') %}
+				<td>IN-ACTIVE</td>
+				{% endif %}
+				<td><a href="?action=update&id={{ row['staff_id'] }}" class="btn btn-outline-dark">UPDATE</a></td>
+				{% endif %}
+				{% if row['user_type']=='staff' %}
+				<td><a href="?action=inactive&id={{ row['username'] }}#abc" class="btn btn-outline-danger" >DEACTIVATE</a></td>
+				<td><a href="?action=resigned&id={{ row['username'] }}#abc" class="btn btn-outline-info" onclick="return confirm('Are you sure you want to TERMINATE this Staff?');">TERMINATE</a></td>
+
+				{% elif row['user_type']=='inactive'%}
+				<td><a href="?action=active&id={{ row['username'] }}#abc" class="btn btn-outline-success" >ACTIVATE</a></td>
+				<td><a href="?action=resigned&id={{ row['username'] }}#abc" class="btn btn-outline-info" onclick="return confirm('Are you sure you want to TERMINATE this Staff?');">TERMINATE</a></td>
+				{% endif %}
+				{% if  row['user_type'] not in('staff','inactive') %}
+				<td>RESIGNED</td>    
+				{% endif %}
+				<!-- <td><a href="transfer&e&id={{ row['username'] }}" class="btn btn-danger">TRANSFER</a></td> -->
+		
+
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO STAFFS IN YOUR BRANCH</h2>
+		{% endif %}
+
+</div>
+
+{% include 'footer.html' %}

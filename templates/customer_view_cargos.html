@@ -1,0 +1,69 @@
+{% include 'customerheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+<form method="post">
+<table align="right">
+	<tr>
+		<td><input type="text" name="search" placeholder="Search Package"></td>
+		<td><input type="submit" name="submit" class="btn btn-info" value="SEARCH"></td>
+	</tr>
+</table>
+</form>
+<br>
+<br><br>
+<br>
+
+<form method="post">
+		{% if data['cargo'] %}
+		<h1><B>CARGO PACKAGES IN OUR SYSTEM</B></h1>
+		<table class="table" width="1000px">
+			<tr  align="center">
+				<th>PACKAGE NAME</th>
+				<th>MAXIMUM WEIGHT(kg)</th>
+				<th>MAXIMUM HEIGHT(cm)</th>
+				<th>MAXIMUM WIDTH(cm)</th>
+				<th>MAXIMUM DISTANCE(km)</th>
+				<th>PRICE  (₹)</th>
+				<th></th>
+				<!-- <th>BOOK</th> -->
+	
+			</tr>
+			{% for row in data['cargo'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>{{row['packname']}}</td>
+				<td>{{ row['maximum_weight'] }}</td>
+				<td>{{row ['maximum_width']}}</td>
+				<td>{{ row['maximum_height']}}</td>
+				<td>{{row['maximum_distance']}}</td>
+				<td>{{row['minimum_price']}}</td>
+				<td><a href="customer_book?id={{ row['pack_id'] }}" class="btn btn-outline-primary">BOOK</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO CARGO SERVICES IN OUR SYSTEM</h2>
+		{% endif %}
+
+	</form>
+
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

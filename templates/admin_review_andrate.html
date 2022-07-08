@@ -1,0 +1,50 @@
+{% include 'adminheader.html' %}
+
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+{% if data['rating']%}
+<h1>VIEW RATING</h1>
+<div style="overflow-y: auto;height: 500px">
+<table class="table" style="width: 800px">
+	<tr>
+        <th>CUSTOMER ID</th>
+		<th>CUSTOMER</th>
+		<th>BRANCH</th>
+		<th>RATE</th>
+		<th>REVIEW</th>
+		<th>DATE</th>
+	</tr>
+
+{% for row in data['rating'] %}
+<tr>
+    <td>{{ row['customer_id'] }}</td>
+	<td>{{row['first_name'] +" "+row['last_name']}}</td>
+	<td>{{row['branch_name']}}</td>
+	<td>{{row['rating_point']}}</td>
+	<td>{{row['review_comment']}}</td>
+	<td>{{row['review_date']}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+</center>
+
+                </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

@@ -1,0 +1,67 @@
+{% include 'dboyheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+<form method="post">
+
+
+		{% if data['works'] %}
+		<h1><B>CARGO PACKAGE PICKUP's</B></h1>
+		<table class="table" width="1000px">
+			<tr align="center">
+				<th>BOOKING ID</th>
+				<th>CUSTOMER NAME</th>
+				<TH>PHONE</TH>
+				<TH>EMAIL</TH>
+				<th>PICKUP ADDRESS</th>
+				<!-- <th>BRANCH</th> -->
+				<th>DESTINATION ADDRESS</th>
+				<th></th>
+				
+			</tr>
+			{% for row in data['works'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>B__{{ row['booking_id'] }}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['phone']}}</td>
+				<td>{{ row['email']}}</td>	
+				<td>{{ row['from_loc']}}</td>	
+				<!-- <td>{{ row['toloc']}}</td>	 -->
+				<td>{{ row['toloc']}}</td>	
+				{% if row['booking_status'] == 'Paid' %}
+				<td><a href="?action=pickedup&id={{row['booking_id']}}" class="btn btn-outline-primary btn-sm">Package Collected ??</a></td>
+		
+				{% elif row['booking_status'] == 'pickedup' %}
+				<!-- <td><a href="?action=arrived&id={{row['booking_id']}}" class="btn btn-outline-primary btn-sm">DELIVERED AT {{ row['from_branch']}}</a></td> -->
+				<td><a href="?action=arrived&id={{row['booking_id']}}" class="btn btn-outline-primary btn-sm">DELIVERED TO BRANCH ??</a></td>
+			
+				
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<h2>NO PACAKGE TO PICK UP</h2>
+		{% endif %}
+	</form>
+
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

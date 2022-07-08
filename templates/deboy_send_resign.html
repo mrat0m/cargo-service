@@ -1,0 +1,57 @@
+{% include 'dboyheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+	 {% if data['request'] %}
+	 <h1 style="margin-top: 3em">REQUEST SENDED</h1>
+	 <table class="table" style="width: 500px">
+	 	<tr>
+	 		<th>REASON</th>
+	 		<th>DATE</th>
+	 		<th>STATUS</th> 		
+	 	</tr>
+	 	{% for row in data['request'] %}
+	 	<tr>
+	 		<td>{{row['reason']}}</td>
+	 		<td>{{row['date']}}</td>
+	 		<td>{{row['status']}}</td>
+	 	</tr>
+	 	{% endfor %}
+	 </table>
+	 {% else %}
+
+    <h1 style="margin-top: 3em">SEND RESIGN REQUEST</h1>
+<form method='post'>
+<table class="table" style="width: 500px"> 
+		<tr>
+			<th>REASON</th>
+			
+			<td>
+				<textarea name="reason"></textarea>
+			</td>
+		</tr>
+		
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="REQUEST" class="btn btn-primary"></td>
+		</tr>
+</table>
+
+{% endif %}
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+}
+{% include 'footer.html' %}

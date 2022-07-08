@@ -1,0 +1,56 @@
+{% include 'adminheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+	<form method="post">
+
+		{% if data['customers'] %}
+		<!-- <td><a href="?action1=inactive" class="btn btn-outline-danger" >IN-ACTIVE</a></td>
+		<td><a href="?action1=active" class="btn btn-outline-success" >ACTIVE</a></td> -->
+		<h1><B>CUSTOMER DETAILS</B></h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['customers'] %}
+			<tr>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['last_name']}}</td>
+			
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				{% if row['user_type']=='customer' %}
+				<td><a href="?action=inactive&id={{ row['username'] }}#abc" class="btn btn-outline-danger" >DEACTIVATE</a></td>
+				{% else %}
+				<td><a href="?action=active&id={{ row['username'] }}#abc" class="btn btn-outline-success" >ACTIVATE</a></td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO CUSTOMERS </h2>
+		{% endif %}
+
+	</form>
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

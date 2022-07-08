@@ -1,0 +1,74 @@
+{%  include 'customerheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+    <h1 style="margin-top: 3em"><B>SEND FEEDBACK</B></h1>
+<form method='post'>
+<table class="table" style="width: 500px"> 
+		<tr style="border-bottom-style: hidden;">
+			<th>BRANCH</th>
+			
+			<td>
+				<select name="bid">
+					{% for row in data['branch'] %}
+					
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+				
+					{% endfor %}
+				</select>
+			</td>
+	
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>FEEDBACK</th>
+			<td><input type="text" name="fb" class="form-control" required></td>
+		</tr>
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="ADD" class="btn btn-outline-primary"></td>
+		</tr>
+</table>
+
+{% if data['fb']%}
+
+<table class="table" style="width: 800px">
+	<tr>
+		<th>BRANCH</th>
+		<th>FEEDBACK</th>
+		<th>REPLY</th>
+		<th>DATE</th>
+	</tr>
+
+{% for row in data['fb'] %}
+<tr>
+	<td>{{row['branch_name']}}</td>
+	<td>{{row['feedback_description']}}</td>
+	<td>{{row['reply']}}</td>
+	<td>{{row['feedback_date']}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+</form>
+</center>
+
+  </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,175 @@
+{% include 'adminheader.html' %}
+
+
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+                                	
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+    <script type="text/javascript">
+        // window.onload = function () {
+          function myFunction(){
+            var mapOptions = {
+                center: new google.maps.LatLng(9.9763482, 76.286272),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) {
+                alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+              document.getElementById('lat').value = e.latLng.lat();
+                document.getElementById('lon').value = e.latLng.lng();
+           
+
+            });
+        }
+    </script>
+<style type="text/css">
+</style>
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+
+		<h1><B>UPDATE PACKAGE</B></h1>
+
+		<table class="table" style="width:  700px">
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PACKAGE NAME</th>
+			<td><input type="text" name="packname"  class="form-control" style="width: 140px;" value="{{data['updater'][0]['packname']}}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM WEIGHT(kg)</th>
+			<td><input type="text" name="maxkg"  class="form-control" style="width: 140px;" value="{{data['updater'][0]['maximum_weight']}}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM HEIGHT(cm)</th>
+			<td><input type="text" name="maxh"  class="form-control" style="width: 140px;" id="lat"  value="{{data['updater'][0]['maximum_height']}}" required>
+			
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM WIDTH(cm)</th>
+			<td><input type="text" name="maxw"  class="form-control" style="width: 140px;" id="lat"  value="{{data['updater'][0]['maximum_width']}}" required >
+			
+		</tr>
+		
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM DISTANCE(km)</th>
+			<td><input type="text" name="maxkm"  class="form-control" style="width: 140px;" id="lon" value="{{data['updater'][0]['maximum_distance']}}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MINIMUM PRICE(₹)</th>
+			<td><input type="text" name="maxp"  class="form-control" style="width: 140px;" value="{{data['updater'][0]['minimum_price']}}" required></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-outline-primary btn-lg"></td>
+		</tr>
+	</table>
+
+
+
+
+		{% else %}
+		<h1><B>ADD NEW PACKAGES</B></h1>
+
+	<table class="table" style="width:  700px" >
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>PACKAGE NAME</th>
+			<td><input type="text" name="packname"  class="form-control" style="width: 140px;"  required></td>
+		</tr>
+
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM WEIGHT(kg)</th>
+			<td><input type="text" name="maxkg"  class="form-control" style="width: 140px;" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM HEIGHT(cm)</th>
+			<td><input type="text" name="maxh"  class="form-control" style="width: 140px;" id="lat" required>
+			</td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM WIDTH(cm)</th>
+			<td><input type="text" name="maxw"  class="form-control" style="width: 140px;" id="lat" required></td>
+			
+		</tr>
+		
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MAXIMUM DISTANCE(km)</th>
+			<td><input type="taext" name="maxkm"  class="form-control" style="width: 140px;" id="lon" required ></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;" align="center">
+			<th>MINIMUM PRICE(₹)</th>
+			<td><input type="text" name="maxp"  class="form-control" style="width: 140px;" required></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD PACKAGE" class="btn btn-outline-primary btn-lg"></td>
+		</tr>
+	</table>
+
+		
+		{% endif %}
+	</form>
+</center>
+
+                </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+<div style="color: black" align="center" id="abc">
+{% if data['price'] %}
+<br><br>
+		<h1>
+			<u style="text-decoration-color: grey;text-decoration-style: dotted;">MANAGE PACKAGES</u>
+		</h1>
+	<!-- <h1>MANAGE PACKAGES</h1> -->
+		<table class="table" width="1000px">
+			<tr style="text-align:center">
+				<th>PACKAGE ID</th>
+				<th>PACKAGE NAME</th>
+				<th>MAXIMUM WEIGHT(kg)</th>
+				<th>MAXIMUM HEIGHT(cm)</th>
+				<th>MAXIMUM WIDTH(cm)</th>
+				<th>MAXIMUM DISTANCE(km)</th>
+				<th>MINIMUM PRICE(₹)</th>
+				<!-- <th>UPDATE</th> -->
+				<th></th>
+				<th></th>
+				
+			</tr>
+			{% for row in data['price'] %}
+			<tr style="text-align:center">
+				<td>{{ row['pack_id'] }}</td>
+				<td>{{ row['packname'] }}</td>
+				<td>{{ row['maximum_weight'] }}</td>
+			
+				<td>{{ row['maximum_height']}}</td>
+				<td>{{row['maximum_width']}}</td>
+				<td>{{row['maximum_distance']}}</td>
+				<td>{{row['minimum_price']}}</td>
+				<td><a href="?action=update&id={{ row['pack_id'] }}" class="btn btn-outline-dark">UPDATE</a></td>
+				{% if row['pstatus']=='active' %}
+				<td><a href="?action=inactive&id={{ row['pack_id'] }}#abc" class="btn btn-outline-danger" >DEACTIVATE</a></td>
+				{% else %}
+				<td><a href="?action=active&id={{ row['pack_id'] }}#abc" class="btn btn-outline-success">ACTIVATE</a></td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO TOUR TYPES ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+</div>
+{% include 'footer.html' %}

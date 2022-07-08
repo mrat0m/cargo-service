@@ -1,0 +1,147 @@
+{% include 'adminheader.html' %}
+
+
+
+<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			var a = window.open('', '', 'height=500, width=500'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 
+
+<!--  -->
+
+
+<div style="color: black">
+	<center>
+<form method="post">
+	<table class="table" align="center" style="width: 1000px">
+		<tr>
+			<th>FILTER:</th>
+					<th><input type="radio" name="type" value="Paid" >Paid</th>
+					<th><input type="radio" name="type" value="all" checked ><br>All</th>
+			<th>From Branch:</th>
+			<td><br>
+				<select name="branch">
+					<option value="no">---select---</option>
+					{% for row in data['branch'] %}
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+			<th>To Branch:</th>
+			<td><br>
+				<select name="tbranch">
+					<option value="no">---select---</option>
+					{% for row in data['branch'] %}
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+			<th>FROM DATE:</th>
+			<td>
+				<br>
+				<input type="date" name="from_date"></td>
+			<th>TO DATE:</th>
+			<td>
+				<br>
+				<input type="date" name="to_date"></td>
+			<td>
+				<br>	
+				<input type="submit" name="submit" value="search" class="btn btn-outline-info">
+		    </td>
+			<td><br><a href="admin_print" class="btn btn-primary">PRINT</a></td>
+		</tr>
+		<!-- <tr>
+			<th>FILTER:</th>
+					<th><input type="radio" name="type" value="Paid" ><th>Paid</th></th>
+					<th><input type="radio" name="type" value="all" checked ></th><th>All Bookings</th>
+		</tr> -->
+	</table>
+
+	
+		{% if data['booking'] %}
+		<br><br><br>
+		<h1><B>BOOKINGS</B><hr></h1>
+		{% if data['bran_id'] %}
+		{% for i in data['branch'] %}
+				{% if i['branch_id'] |int==data['bran_id'] |int%}
+				<h2>Branch :{{i['branch_name']}}</h2>
+				{% endif %}
+		{% endfor %}
+		{% endif %}
+
+		<table class="table" width="1000px">
+			<!-- <tr>	
+				<td align="left" class="btn btn-info">TOTAL :{{data['total']}}</td>
+		    </tr> -->
+			
+				
+			
+			<tr>
+				<th>BOOKING ID</th>
+				<th>CUSTOMER NAME</th>	
+				<th>DESTINATION LOCATION</th>
+				<th>PARCEL WEIGHT(kg)</th>
+				<th>PARCEL LENGTH(cm)</th>
+				<th>PARCEL WIDTH(cm)</th>
+				<th>FROM BRANCH</th>
+				<th>TO BRANCH</th>
+				<th>PRICE &emsp;(₹)</th>
+				<th>BOOKING DATE</th>
+				<th>BOOKING STATUS</th>
+			</tr>
+			{% for row in data['booking'] %}
+			<tr>
+				<td>B__{{row['booking_id'] }}</td>
+				<td>{{row['first_name']}}</td>
+				<td>{{ row['toloc'] }}</td>
+				<td>{{ row['weight'] }}</td>
+				<td>{{row ['length']}}</td>
+				<td>{{ row['width']}}</td>
+
+			{% for i in data['branch'] %}
+				{% if i['branch_id']==row['from_branch'] %}
+				<td>{{i['branch_name']}}</td>
+				{% endif %}
+			{% endfor %}
+				
+			{% for i in data['branch'] %}
+				{% if i['branch_id']==row['to_branch'] %}
+				<td>{{i['branch_name']}}</td>
+				{% endif %}
+			{% endfor %}
+
+				{% if row['amount']=='Pending' %}
+				<td>NOT CONFORMED</td>
+				{% else %}
+				<td>{{row['amount']}}</td>
+				{% endif %}
+				<td>{{row['booking_date']}}</td>
+				<td>{{row['booking_status']}}</td>
+			</tr>
+			
+			{% endfor%}
+			
+		</table>
+		{% else %}
+		<br><br><br><br><br><br><br><br><br>	
+		<h2>NO BOOKINGS</h2>
+		<br><br><br><br><br>
+		{% endif %}
+
+		
+<span class="btn btn-info" style="width:200px"><B>TOTAL : ₹ {{data['total']}}</B></span>
+
+<!-- <a href="admin_print" class="btn btn-info">PRINT</a> -->
+
+	<!-- <input type="button" class="btn btn-info" value="click to print" onclick="printDiv()"> -->
+	</form>
+
+</center>
+</div>
+<br><br>
+{% include 'footer.html' %}

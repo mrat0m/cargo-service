@@ -1,0 +1,107 @@
+{% include 'customerheader.html' %}
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+<form method="post">
+	<form method="post">
+		{% if data['track'] %}
+		<h1>TRACK THE CARGO</h1>
+		<table class="table">
+			<tr>
+				<th>PLACE NAME</th>
+				<th>DATE</th>
+			</tr>
+			{% for row in data['track'] %}
+			<tr>
+				<td>{{row['place_name']}}</td>
+				<td>{{row['status_date_time']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		{% elif data['wait'] %}
+		<h1>YOUR CARGO NOT REACHED AT DESTINATION BRANCH! PLEASE WAIT</h1>
+
+		{% elif data['bookings'] %}
+		<h1><B>CARGO BOOKING HISTORY</B></h1>
+		<table class="table" width="1000px">
+			<tr>
+				<th>BOOKING ID</th>
+				<th>LOCATION</th>
+				<th>WEIGHT</th>
+				<th>HEIGHT</th>
+				<th>WIDTH</th>
+				<th>FROM BRANCH</th>
+				<th>TO BRNCH</th>
+				<th>STATUS</th>
+				<th>AMOUNT</th>
+				<th></th>
+
+			</tr>
+			{% for row in data['bookings'] %}
+			<tr>
+				<td>B__{{row['booking_id']}}</td>
+				<td>{{ row['toloc'] }}</td>
+				<td>{{row ['weight']}}</td>
+				<td>{{ row['length']}}</td>
+				<td>{{row['width']}}</td>
+			{% for i in data['branch'] %}
+				{% if i['branch_id']==row['from_branch'] %}
+				<td>{{i['branch_name']}}</td>
+				{% endif %}
+			{% endfor %}
+			{% for i in data['branch'] %}
+				{% if i['branch_id']==row['to_branch'] %}
+				<td>{{i['branch_name']}}</td>   <!-- can use as delivery branch name-->
+				{% endif %}
+			{% endfor %}
+				{%if row['booking_status']=='pickedup' %}
+				<td>Parcel Collected</td>
+
+				{%elif row['booking_status']=='arrived' %}
+				<td>Arrived at Starting Branch</td>
+
+				{%elif row['booking_status']=='dispatched' %}
+				<td>Arrived At Destination branch</td>
+
+				{%elif row['booking_status']=='Reached' %}
+				<td>Assigned to Delivery boy</td>
+				{% else %}
+				<td>{{row['booking_status']}}</td>
+				{% endif %}
+
+				<td>PAID ₹{{row['amount']}}/-</td>
+				{% if row['booking_status'] !='delivered'%}
+				<td><a href="?action=track&boid={{ row['booking_id'] }}" class="btn btn-outline-primary btn-sm">Track</a></td>
+				{% else %}
+				<td>DELIVERED</td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+
+		<h2>NO CARGOS BOOKED</h2>
+		{% endif %}
+
+
+	</form>
+
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

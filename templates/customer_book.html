@@ -1,0 +1,89 @@
+{% include 'customerheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<form method="post">
+	{% for row in data['price'] %}
+		<h1><B>BOOK CARGO PACKAGE -<I> {{row['packname']}}</I></B> (₹{{row['minimum_price']}})</h1> 
+	{% endfor %}
+	<table class="table" style="width:  700px">
+		<tr style="border-bottom-style: hidden;">
+			<th>WEIGHT(kg)</th>
+			<td><input type="number" style="width: 185px;" name="kg"  class="form-control" value="{{data['price'][0]['maximum_weight']}}" placeholder="Maximum-{{data['price'][0]['maximum_weight']}}" max="{{data['price'][0]['maximum_weight']}}"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>HEIGHT(cm)</th>
+			<td><input type="number" style="width: 185px;" name="len"  class="form-control" id="lat" value="{{data['price'][0]['maximum_height']}}" placeholder="Maximum-{{data['price'][0]['maximum_height']}}" max="{{data['price'][0]['maximum_height']}}">
+			</td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>WIDTH(cm)</th>
+			<td><input type="number" style="width: 185px;" name="width" value="{{data['price'][0]['maximum_width']}}" class="form-control" id="lat" placeholder="Maximum-{{data['price'][0]['maximum_width']}}" max="{{data['price'][0]['maximum_width']}}" ></td>	
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>FROM BRANCH</th>
+			<td >
+				<select name="fromb" class="form-control" style="height: 50px;width: 185px;" required>
+					<option disabled selected>SELECT FROM BRANCH</option>
+					{% for row in data['branch'] %}
+					
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+				
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>TO BRANCH</th>
+			<td>
+				<select name="to" class="form-control" style="height: 50px;width: 185px;" required>
+					<option disabled selected>SELECT TO BRANCH</option>
+					{% for row in data['branch'] %}
+					
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+				
+					{% endfor %}
+				</select>
+			</td>
+			
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>PICKUP ADDRESS</th>
+			
+			<td>
+				<input type="text" name="floc" class="form-control"  required="">
+			</td>
+	
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>DESTINATION ADDRESS</th>
+			
+			<td>
+				<input type="text" name="loc"  class="form-control"  required>
+			</td>
+	
+		</tr>
+		<tr>
+			<!-- <td></td> -->
+			<td colspan="2"><input type="submit" class="btn btn-outline-primary btn-lg" name="submit" value="BOOK"></td>
+		</tr>
+	</table>
+</form>
+
+                            </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

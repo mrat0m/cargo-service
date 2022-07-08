@@ -1,0 +1,75 @@
+{% include 'customerheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+	<form method="post">
+<style type="text/css">
+	td{
+		color: black !important;
+	}
+	.qwe{
+		color: white !important;
+	}
+</style>
+
+		{% if data['customer'] %}
+		<h1><B>MY PROFILE</B></h1> 
+		<table class="table" width="600px" style="height: 200px" >
+			<tr style="border-bottom-style: hidden;" align="center">
+				<th>FIRST NAME</th>
+				<!-- <td><input type="text" name="" value="{{ data['customer'][0]['first_name'] }}" class="form-control"  readonly></td> -->
+				<td class="qwe"><H3><I>{{ data['customer'][0]['first_name'] }}</I></H3></td>
+			</tr>
+			<tr style="border-bottom-style: hidden;" align="center">
+				<th>LAST NAME</th>
+				<!-- <td><input type="text" name="" value="{{data['customer'][0] ['last_name']}}" class="form-control" readonly></td> -->
+				<td class="qwe"><H3><I>{{ data['customer'][0]['last_name'] }}</I></H3></td>
+			</tr>
+			<tr style="border-bottom-style: hidden;" align="center">
+				<th>USERNAME</th>
+				<!-- <td><input type="text" name="uname" value="{{data['customer'][0]['username']}}" class="form-control" readonly></td> -->
+				<td class="qwe"><H3><I>{{ data['customer'][0]['username'] }}</I></H3></td>
+			</tr> 
+			<tr style="border-bottom-style: hidden;" align="center">
+				<th>PHONE</th>
+				<td><input type="text" name="ph" pattern="[7-9]{1}[0-9]{9}" value="{{ data['customer'][0]['phone']}}" class="form-control"></td>
+			</tr>
+			
+			<tr style="border-bottom-style: hidden;" align="center">
+				<th>EMAIL</th> 
+				<td><input type="email" name="email" value="{{data['customer'][0]['email']}}" class="form-control"></td>
+			</tr>
+			
+			
+		<!-- <tr>
+				<th>PASSWORD</th>
+				<td><input type="text" name="password" value="{{data['customer'][0]['password']}}" class="form-control"></td>
+			</tr> -->
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="UPDATE PROFILE" class="btn btn-outline-primary"><!-- &emsp;<a href="?action=delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">DELETE ACCOUNT</a> --></td>
+			</tr>
+		</table>
+		{% endif %}
+	
+	</form>
+</center>
+
+
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

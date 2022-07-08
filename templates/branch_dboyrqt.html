@@ -1,0 +1,97 @@
+{% include 'branchheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+
+<script type="text/javascript">
+	function fun(){
+		var password=document.getElementById('password').value;
+		var cpassword=document.getElementById('cpassword').value;
+		
+		if(password!=cpassword){
+			alert("PASSWORD DOES NOT MATCH");
+			document.getElementById("cpassword").value='';
+		}
+
+	}
+	function f2(){
+			var c=confirm("ARE YOU SURE TO TERMINATE DELIVERY BOY? ")
+			 // if( c == true ) {
+    //               document.getElementById("resigned").value="set";
+    //               return true;
+    //            }
+    //             else {
+    //               document.getElementById("resigned").focus();
+    //               return false;
+    //            }         
+
+		}
+</script>
+<center>
+	<form method="post">
+		
+		
+
+		
+
+		{% if data['request'] %}
+		<h1>DELIVERY BOYS RESIGN REQUEST</h1>
+		<table class="table" width="600px">
+			<tr align="center">
+				<th>DELIVERY BOY ID</th>
+				<th>NAME</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>REASON FOR RESIGN</th>
+				<th>DATE</th>
+				<th>DELIVERY BOY STATUS</th>
+				<th> REQUEST STATUS</th>
+				<th></th>
+				<th></th>
+			
+				
+			</tr>
+			{% for row in data['request'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>B{{ data['bid'] }}DBOY0{{ row['boy_id'] }}</td>
+				<td>{{ row['first_name'] }} {{row ['last_name']}}</td>
+				<td>{{ row['phone']}}</td>
+				
+				<td>{{row['email']}}</td>
+				<td>{{row['reason']}}</td>
+				<td>{{row['date']}}</td>
+				
+				<td>{{row['user_type']}}</td>
+				<td>{{row['status']}}</td>
+				{% if  (row['user_type'] not in ('resigned','resigned')) and row['status']=='Pending' %}
+				<td><a href="?action1=accept&id={{ row['username'] }}" class="btn btn-outline-warning">ACCEPT</a></td>
+				<td><a href="?action1=decline&id={{ row['username'] }}" class="btn btn-outline-danger">DECLINE</a></td>
+				{% endif %}
+
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO RESIGN REQUESTS</h2>
+		{% endif %}
+		
+	</form>
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

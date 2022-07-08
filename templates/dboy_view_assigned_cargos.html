@@ -1,0 +1,96 @@
+{% include 'dboyheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+<center>
+<form method="post">
+	{% if data['status'] %}
+	
+	<h1><B>UPDATE CARGO STATUS</B></h1>
+	<br><br>
+	<table>
+		<tr>
+			<th>CURRENT PLACE : </th>
+			<td>&nbsp;<input type="text" name="name"></td>
+			<td colspan="2" align="center">&nbsp;<input type="submit" class="btn btn-info btn-sm" name="submit" value="ADD"></td>
+		</tr>
+		<!-- <tr>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-outline-info btn-sm" name="submit" value="ADD"></td>
+		</tr>	 -->
+		<tr>
+			<td><br></td>
+		</tr>
+		<td colspan="2" align="center"><a href="?action2=delivered&id={{data['id']}}" class="btn btn-outline-primary">UPDATE AS DELIVERED</a></td>	
+	</table>
+
+	{% if data['status']!='Pending' %}
+	<br>
+	<h1><B>CARGO TRACKING DETAILS</B></h1>
+		<table rules="all">
+			<tr>
+				<th>&emsp;PLACE NAME&emsp;</th>
+				
+				<th>&emsp;&emsp;&emsp;&emsp;DATE</th>
+			</tr>
+			{% for row in data['status'] %}
+			<tr>
+				<td>&emsp;&emsp;{{row['place_name']}}</td>
+				<td>&emsp;{{row['status_date_time']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+
+		{% elif data['works'] %}
+		<h1>BOOKINGS</h1>
+		<table class="table" width="1000px">
+			<tr align="center">
+				<th>BOOKING ID</th>
+				<th>CUSTOMER NAME</th>
+				<th>PARCEL WEIGHT(kg)</th>
+				<th>PARCEL HEIGHT(cm)</th>
+				<th>PARCEL WIDTH(cm)</th>	
+				<th>DESTINATION</th>
+				<th></th>
+
+			</tr>
+			{% for row in data['works'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>B__{{ row['booking_id'] }}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['weight']}}</td>
+				<td>{{row ['length']}}</td>
+				<td>{{ row['width']}}</td>
+			
+				<td>{{row['toloc']}}</td>
+				{% if row['booking_status'] !='delivered'%}
+				<td><a href="?action=dstatus&id={{row['booking_id']}}" class="btn btn-outline-primary">UPDATE DELIVERY STATUS</a></td>
+				{% else %}
+				<td>DELIVERED</td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO ASSIGNED CARGOS</h2>
+		{% endif %}
+	</form>
+
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+{% include 'footer.html' %}

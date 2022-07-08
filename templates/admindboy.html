@@ -1,0 +1,65 @@
+{% include 'adminheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+
+{% if data['deliveryboys'] %}
+		<h1>DELIVERY BOYS BRANCH-{{data['bname']}}</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>DELIVERY BOY ID</th>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>STATUS</th>
+			<!-- 	<th>UPDATE</th> -->
+				<!-- <TH>DELETE</TH> -->
+			</tr>
+			{% for row in data['deliveryboys'] %}
+			<tr>
+				<td>{{row['boy_id']}}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['last_name']}}</td>
+				<td>{{ row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				{% if  row['user_type'] not in('dboy','dboy') %}
+				<td>IN-ACTIVE</td>
+				{% endif %}
+				{% if  row['user_type'] not in('inactive','inactive') %}
+				<td>ACTIVE</td>
+				{% endif %}
+				<!-- <td>{{row['user_type']}}</td>
+				<td><a href="?action=update&id={{ row['boy_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				{% if row['user_type']=='dboy' %}
+				<td><a href="?action=inactive&id={{ row['username'] }}" class="btn btn-danger" >DEACTIVATE</a></td>
+				{% else %}
+				<td><a href="?action=active&id={{ row['username'] }}" class="btn btn-danger" >ACTIVATE</a></td>
+				{% endif %} -->
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO DELIVERY BOYS IN  BRANCH  {{data['bname']}}</h2>
+		{% endif %}
+		
+	</form>
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+
+{% include 'footer.html' %}

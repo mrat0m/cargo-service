@@ -1,0 +1,49 @@
+{% include 'branchheader.html' %}
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+	<form method="post">
+
+		{% if data['customers'] %}
+		<h1><B>ALL CUSTOMERS</B></h1>
+		<table class="table" width="600px">
+			<tr align="center">
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['customers'] %}
+			<tr style="border-bottom-style: hidden;" align="center">
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row ['last_name']}}</td>
+			
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO CUSTOMERS IN YOUR BRANCH</h2>
+		{% endif %}
+
+	</form>
+</center>
+ </div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

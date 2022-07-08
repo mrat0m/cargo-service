@@ -1,0 +1,140 @@
+{% include 'publicheader.html' %}
+
+
+
+<div id="pageintro" class="hoc clear"> 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+    <script type="text/javascript">
+        // window.onload = function () {
+          function myFunction(){
+            var mapOptions = {
+                center: new google.maps.LatLng(9.9763482, 76.286272),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) {
+                alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+              document.getElementById('lat').value = e.latLng.lat();
+                document.getElementById('lon').value = e.latLng.lng();
+           
+
+            });
+        }
+    </script>
+	<!-- <script>function ValidateEmail(inputText)
+		{
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(inputText.value.match(mailformat))
+		{
+		alert("Valid email address!");
+		document.email.focus();
+		return true;
+		}
+		else
+		{
+		alert("You have entered an invalid email address!");
+		document.email.focus();
+		return false;
+		}
+		}
+	</script> -->
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	function fun(){
+		var password=document.getElementById('password').value;
+		var cpassword=document.getElementById('cpassword').value;
+		
+		if(password!=cpassword){
+			alert("PASSWORD DOES NOT MATCH");
+			document.getElementById("cpassword").value='';
+		}
+
+	}
+</script>
+
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+                                <div class="tm-banner-header">
+<center>
+	<form method="post">
+		<table style="width: 500px">
+			<tr>
+				<td>
+					
+		
+	<h1><B>CUSTOMER REGISTRATION</B></h1>
+	<table class="table" style="width:  600px">
+		<tr style="border-bottom-style: hidden;">
+			<th>FIRST NAME</th>
+			<td><input type="text" name="fname"  pattern="[a-zA-Z ]+$" class="form-control" required>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>LAST NAME</th>
+			<td><input type="text" name="lname"  class="form-control" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" pattern="[7-9]{1}[0-9]{9}" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required></td>
+		</tr style="border-bottom-style: hidden;">
+		
+		<tr style="border-bottom-style: hidden;">
+			<th>LATITUDE</th>
+			<td><input type="text" name="lat"  class="form-control" id="lat" required></td>
+			<td colspan="2" class="btn btn-outline-info"><a onclick="myFunction();"><b>View Map</b></a></td>
+		</tr>
+		
+		<tr style="border-bottom-style: hidden;">
+			<th>LONGITUDE</th>
+			<td><input type="text" name="lon"  class="form-control" id="lon" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>USER NAME</th>
+			<td style="width: 285px;"><input type="text" name="uname" minlength="5" placeholder="Username Must Be Atleast 5 characters" class="form-control" required></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>PASSWORD</th>
+			<td><input type="password" name="password"  minlength="8" placeholder="Password Must Be Atleast 8 characters" class="form-control" required id="password"></td>
+		</tr>
+		<tr style="border-bottom-style: hidden;">
+			<th>CONFIRM PASSWORD</th>
+			<td><input type="password" name="cpassword"  minlength="8" placeholder="Password Must Be Atleast 8 characters" class="form-control" required id="cpassword" onchange="fun()"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="Register" class="btn btn-info btn-lg" ></td>
+		</tr>
+	</table>
+</td>
+<td>
+	<div id="dvMap" style="width: 600px; height: 400px"></div>
+</td>
+
+			</tr>
+		</table>
+
+</form>
+</center>
+</div>    
+                            </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body onload="printDiv()">
+
+
+
+
+
+<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			// var a = window.open('', '', 'height=500, width=500'); 
+			var a = window.open('', '', 'height=500, width=750,top=75,left=400'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 
+
+<!--  -->
+
+
+<div style="color: black">
+	
+
+
+
+	 <div id="div_print" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
+      <br>
+	  <meta http-equiv="refresh" content="0; url=http://127.0.0.1:5030/branch/branch_view_bookings" />
+      <h5 class="navbar-brand brand float-md-start mb-0" style="text-align: right;margin-top: -30px;">
+
+      <img style="width:75px; height:50px;" src="/static/images/img/logo.png">
+      <br>QUICK CARGO
+      </h5>
+	    <p align="left" style="margin-top: -50px;"> <i class="fa fa-address-card" aria-hidden="true"></i> QUICK CARGO, ABC Street,India. 
+		   <br><i class="fa fa-phone" aria-hidden="true"></i> +1 234 567 
+	       <br><i class="fa fa-envelope" aria-hidden="true"></i> quickcargo@gmail.com
+        </p>
+		{% if data['booking'] %}
+		<br><br><br><br><br><br>
+		<center>
+		<h1>BOOKINGS</h1>
+
+		<table class="table" width="1000px">
+			<tr>
+				<td align="right" class="btn btn-info">TOTAL -{{data['total']}}</td>
+			</tr>
+			<tr>
+				<th>BOOKING ID</th>
+				<th>CUSTOMER NAME</th>	
+				<th>LOCATION</th>
+				<th>PARCEL HEIGHT</th>
+				<th>PARCEL LENDTH</th>
+				<th>PARCEL WIDTH</th>
+				<th>FROM BRANCH</th>
+				<th>TO BRANCH</th>
+				<th>PRICE</th>
+				<th>BOOKING DATE</th>
+				<th>BOOKING STATUS</th>
+			</tr>
+			{% for row in data['booking'] %}
+			<tr>
+				<td>B__{{row['booking_id'] }}</td>
+				<td>{{row['first_name']}}</td>
+				<td>{{ row['toloc'] }}</td>
+				<td>{{ row['weight'] }}</td>
+				<td>{{row ['length']}}</td>
+				<td>{{ row['width']}}</td>
+				{% for i in data['branch'] %}
+				{% if i['branch_id']==row['from_branch'] %}
+				<td>{{i['branch_name']}}</td>
+				{% endif %}
+				{% if i['branch_id']==row['to_branch'] %}
+				<td>{{i['branch_name']}}</td>
+				{% endif %}
+			{% endfor %}
+
+				{% if row['amount']=='Pending' %}
+				<td>NOT CONFORMED</td>
+				{% else %}
+				<td>{{row['amount']}}</td>
+				{% endif %}
+				<td>{{row['booking_date']}}</td>
+				<td>{{row['booking_status']}}</td>
+			</tr>
+			
+			{% endfor%}
+			
+		</table>
+		{% else %}
+		
+	
+		<br><br><br><br><br><br><br><br><br>	
+		<h2>NO BOOKINGS</h2>
+		<br><br><br><br><br>
+	</center>
+		{% endif %}
+</div>
+
+
+</body>
+</html>

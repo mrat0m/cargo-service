@@ -1,0 +1,63 @@
+{% include 'publicheader.html' %}
+<div class="tm-page-wrap mx-auto">
+            <section class="tm-banner">
+                <div class="tm-container-outer tm-banner-bg">
+                    <div class="container">
+
+                        <div class="row tm-banner-row tm-banner-row-header">
+                            <div class="col-xs-12">
+       
+                               <div class="tm-banner-header">
+<center>
+
+	<form method="post">
+	{% if data['chp'] %}
+
+
+	<h1 align="center">CHANGE PASSWORD</h1>
+<table class="table" style="width: 400px">
+<tr>
+	<th>PASSWORD: </th>
+	<td><input type="password" name="p"  class="form-control" minlength="8" placeholder="Atleast 8 Charecter"></td>
+</tr>
+
+<tr>
+	<th>CONFIRM PASSWORD</th>
+	<td><input type="password" name="cp" class="form-control" minlength="8" placeholder="Atleast 8 Charecter"></td>
+</tr>
+<input type="text" name="uname" value="{{data['chp']}}" hidden >
+<tr>
+	<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-info"  ></td>
+</tr>
+</table>
+
+{% else %}
+<H1>OTP VERIFICATION</H1>
+<br>
+<!-- <H1>OTP has sent to your mail</H1> -->
+<H1>OTP has sent to <i style="color:rgb(12, 240, 248);">{{data['email']}}</i></H1>
+<table class="table" style="width: 500px">
+	<tr>
+		<th>ENTER OTP</th>
+		<td><input type="text" name="otp" class="form-control"></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" align="center"><input type="submit" name="submit" value="SEND" class="btn btn primary"></td>
+	</tr>
+</table>
+
+</form>
+{% endif %}
+</center>
+</div>
+                  </div>  <!-- col-xs-12 -->                      
+                        </div> <!-- row -->
+                        
+                        <div class="tm-banner-overlay"></div>
+                    </div>  <!-- .container -->                   
+                </div>     <!-- .tm-container-outer -->                 
+            </section>
+        </div>
+
+{% include 'footer.html' %}
